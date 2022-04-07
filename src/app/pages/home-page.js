@@ -1,9 +1,11 @@
 import { LitElement, css, html } from 'lit';
-import {Router} from '@vaadin/router';
+import { Router } from '@vaadin/router';
+import { navBar } from '../components/navBar.js';
 
 
 export class HomeComponent extends LitElement {
     static properties = {
+
         title: { type: String },
         validacion: {type: String},
         inputValue:{type: String},
@@ -12,6 +14,7 @@ export class HomeComponent extends LitElement {
     };
 
     constructor() {
+
         super();
         this.title = 'Create new Player';
         this.users = ['carlos', 'eva'];
@@ -19,6 +22,7 @@ export class HomeComponent extends LitElement {
 
 
     connectedCallback() {
+
         super.connectedCallback();
         this.addEventListener('keyup', (event) => {
             if (event.key === 'Enter') {
@@ -47,6 +51,7 @@ export class HomeComponent extends LitElement {
     }
 
     small{
+
         color: #008CBA; 
     }
 
@@ -90,8 +95,9 @@ export class HomeComponent extends LitElement {
    }
 
    .button:hover {
-       background-color: #16be56;
-       color: white;
+       
+       background-color: #074b21;
+       color: #16be56;
    }
 
    .errorMessage{
@@ -136,13 +142,12 @@ export class HomeComponent extends LitElement {
 
     login() {
         
-        let autenticated = false;
+        let valid = false;
         let errorMesssage = this.renderRoot.querySelector("#errorMessage");
         this.inputValue = this.renderRoot.querySelector("#nickname").value;
-        this.users.includes(this.inputValue.toLowerCase()) ? autenticated = true : autenticated = false;
-        if(autenticated){
+        this.users.includes(this.inputValue.toLowerCase()) ? valid = true : valid = false;
+        if(valid){
             this.userName = this.inputValue;
-            //SpaService.setUser(this.userName);
             Router.go('/game');
         }else{
             errorMesssage.innerHTML = '<small class="fade-in">Invalid Player Name. Please Try Again.</small>';
