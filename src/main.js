@@ -1,11 +1,15 @@
 import './main.css';
 
-import { Router } from '@vaadin/router';
 
-const outlet = document.getElementById('outlet');
-const router = new Router(outlet);
 
-router.setRoutes([
-    
+//pages
 
-]);
+import './app/pages/home-page';
+
+import './app/pages/game-page';
+
+
+
+//router
+
+import './router';
