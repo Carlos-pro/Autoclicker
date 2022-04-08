@@ -49,6 +49,12 @@ export class GameComponent extends LitElement {
 
     }
 
+    .buttonActive {
+
+      display: block;
+
+    }
+
     .buyButton {
 
         display: none;
@@ -95,6 +101,16 @@ export class GameComponent extends LitElement {
   autoclicker () {
 
         let buttonBuy = this.renderRoot.querySelector('#buttonBuy');
+
+        if(this.counter === 10) {
+
+          buttonBuy.classList.remove('buybutton');
+          this.classList.add('buttonActive');
+
+
+        }
+
+        
 
 
   }
