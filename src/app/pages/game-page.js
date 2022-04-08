@@ -39,8 +39,8 @@ export class GameComponent extends LitElement {
 
     .button {
 
-        display: flex;
-        justify-content: center;
+        display: block;
+        text-align: center;
         width: 100%;
         height: 45px;
         border: 3px solid #16be56;
@@ -49,13 +49,22 @@ export class GameComponent extends LitElement {
 
     }
 
+    
     .buttonActive {
 
       display: block;
+      text-align: center;
+      width: 100%;
+      height: 35px;
+      background-color: lightblue;
+      margin-top: 3px;
+      border: 1px solid #16be56;
+      transition-duration: 0.2s;
+
 
     }
 
-    .buyButton {
+    .buttonInactive {
 
         display: none;
 
@@ -66,7 +75,19 @@ export class GameComponent extends LitElement {
         background-color: tomato;
     
     }
+
+    .buttonActive:hover {
+
+      background-color: tomato;
+
+    }
   `;
+
+  firstUpdated() {
+
+
+
+  }
 
   constructor() {
     super();
@@ -83,7 +104,7 @@ export class GameComponent extends LitElement {
           <div class="clicksCounter" id="clicksCounter"><span>${this.counter}</span></div>
         </h2>
         <button id="buttonClick" @click="${this.clicker}" class="button button">¡Merge!</button>
-        <button id="buttonBuy" @click="${this.autoclicker}" class="buyButton">¡Buy Autoclicks!</button>
+        <button id="buttonBuy" @click="${this.autoclicker}" class="buttonInactive">¡Buy Autoclicks!</button>
       </div>
     `;
   }
@@ -93,23 +114,31 @@ export class GameComponent extends LitElement {
     
         let clickCounter = this.renderRoot.querySelector('#clicksCounter');
         let clickButton = this.renderRoot.querySelector('#buttonClick');
+        let buttonBuy = this.renderRoot.querySelector('.buttonInactive');
 
             this.counter++; 
+
+            if(this.counter > 19) {
+
+              buttonBuy.classList.replace('buttonInactive', 'buttonActive');
+          
+
+            }            
 
   }
 
   autoclicker () {
 
-        let buttonBuy = this.renderRoot.querySelector('#buttonBuy');
+        let buttonBuy = this.renderRoot.querySelector('.buttonActive');
+        let autoClickerBaseCost = 5;
+        let numAutoClickers = 4;
+        let autoClickerCost = autoClickerBaseCost + (autoClickerBaseCost * numAutoClickers);
 
-        if(this.counter === 10) {
+          this.counter = 0;
+   
 
-          buttonBuy.classList.remove('buybutton');
-          this.classList.add('buttonActive');
-
-
-        }
-
+            buttonBuy.classList.replace('buttonActive', 'buttonInactive');
+            console.log('boton', buttonBuy);
         
 
 
